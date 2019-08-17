@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title>{{ page.title }} | 马龄阳的个人网站</title>
+    <title>{{ page.title }} | Jin Ding's personal website</title>
     <script>
         var html = document.getElementsByTagName('html')[0];
         var rem = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -36,14 +36,12 @@
     <div class="wrap">
         <div class="left-main">
             <div class="avatar"></div>
-            <h2>马龄阳</h2>
-            <!-- <h5>风烟俱净</h5> -->
+            <h2>Jin Ding</h2>
             <div class="contact">
-                <a class="github" href="https://github.com/mly-zju"></a>
+                <a class="github" href="https://github.com/jindingars"></a>
             </div>
-            <div class="all-page left-item current"><a href="{{ site.baseurl }}/index.html">文章</a></div>
-            <div class="category left-item"><a href="{{ site.baseurl }}/category/diary.html">分类</a></div>
-            <div class="about left-item"><a href="{{ site.baseurl }}/about.html">关于我</a></div>
+            <div class="all-page left-item current"><a href="{{ site.baseurl }}/index.html">Article</a></div>
+            <div class="about left-item"><a href="{{ site.baseurl }}/about.html">About Me</a></div>
         </div>
         <div class="right-main">
             <div class="article-detail-wrap" style="overflow: hidden;">
@@ -53,30 +51,11 @@
                 </div>
                 <div class="pager-wrap" style="overflow: hidden;">
                     {% if page.next %}
-                    <a class="pager-pre pager" href="{{ site.baseurl }}{{ page.next.url }}">上一篇</a> {% endif %} {% if page.previous %}
-                    <a class="pager-next pager" href="{{ site.baseurl }}{{ page.previous.url }}">下一篇</a> {% endif %}
+                    <a class="pager-pre pager" href="{{ site.baseurl }}{{ page.next.url }}">Previous</a> {% endif %} {% if page.previous %}
+                    <a class="pager-next pager" href="{{ site.baseurl }}{{ page.previous.url }}">Next</a> {% endif %}
                 </div>
-                <!-- 多说评论框 start -->
-                <!-- <div class="ds-thread" data-thread-key="{{ page.id }}" data-title="{{ page.title }}" data-url="http://mly-zju.github.io/{{ page.url }}"></div> -->
-                <!-- 多说评论框 end -->
-                <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-                <!-- <script type="text/javascript">
-        var duoshuoQuery = {short_name:"mly-zju"};
-          (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0]
-             || document.getElementsByTagName('body')[0]).appendChild(ds);
-          })();
-          </script> -->
-                <!-- 多说公共JS代码 end -->
-
-                <!-- UY BEGIN -->
                 <div id="uyan_frame"></div>
                 <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2130013"></script>
-                <!-- UY END -->
             </div>
         </div>
     </div>
