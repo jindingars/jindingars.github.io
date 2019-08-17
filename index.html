@@ -1,306 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" >
-    <script src="https://distill.pub/template.v2.js"></script>
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-  </head>
-  <body>
-    <distill-header></distill-header>
-    <d-front-matter>
-      <script id="distill-front-matter" type="text/json">
-        {
-          "title": "Adversarial Machine Learning",
-          "description": "A visual overview of adversarial machine learning attacks and defenses.",
-          "authors": [
-            {
-              "author": "Anant Kharkar",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Austin Chen",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Christopher Geier",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "David Evans",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Ethan Lowman",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Helen Simecek",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Jin Ding",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Weilin Xu",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Aditi Narvekar",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Bhuvanesh Murali",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Mainuddin Jonas",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Lawrence Hook",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Nishant Jha",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            },
-            {
-              "author": "Fnu Suya",
-              "authorURL": "https://secml.github.io/",
-              "affiliation": "University of Virginia",
-              "affiliationURL": "https://www.jeffersonswheel.org/"
-            }
-          ],
-          "katex": {
-            "delimiters": [
-              {
-                "left": "$$",
-                "right": "$$",
-                "display": false
-              }
-            ]
-          }
-        }
-      </script>
-    </d-front-matter>
-    <d-title>
-      <p>A look at attacks and defenses against adversaries</p>
-    </d-title>
-    <d-article>
-      <p>
-        Neural networks have shown enormous potential as machine learning models, and are being adopted for many applications. As machine learning systems are adopted for security critical applications such as medical diagnostic tools and self-driving cars, there is a larger need for security guareentees. This has created interest in the field of adversarial machine learning, which hopes to reduce an adversary's control over the output of a machine learning model.
-      </p>
-      <p>
-        Deep learning models are a prime target for adversarial attacks because they exist as a black-box. With a complex high dimensional descision boundary, small pertubations in the input have large effects on the output. In this article we identify state-of-the-art attacks and defences for machine learning models. We also provide visualizations for the various attack algorithms.
-      </p>
-
-      <a class="marker" href="#section-1" id="section-1"><span>1</span></a>
-      <h2>Attacks</h2>
-
-      <a class="marker" href="#section-1.1" id="section-1.1"><span>1.1</span></a>
-      <h3>L-BFGS</h3>
-      <p>
-        L-BFGS method is the first attack algorithm proposed in adversarial deep learning area. The original problem is considered in $$L_{2}$$-norm and is formulated as
-        <d-math block>
-          \text{minimize } ||r||_{2} f(x+r) = x + l, x+r \in [0,1]^{m}
-        </d-math>
-        The problem is in general hard because neural networks are generally non-convex and and hence, to solve the problem approximately, the problem above is transformed into form of
-        <d-math block>
-          \text{minimize } c||r||_{2} + loss_{f}(x+r,l) \text{ subject to } x+r \in [0,1]^{m}
-        </d-math>
-        $$c$$ is the costant balancing the perturbation magnitude $$||r||_{2}$$ and the chance of having $$x+r$$ misclassified to be in label $$l$$ by the classifier $$f(x)$$. The solution returned will be an approximate solution to the original formulation.
-      </p>
-
-      <a class="marker" href="#section-1.2" id="section-1.2"><span>1.2</span></a>
-      <h3>FGSM</h3>
-
-      <div id="fgsm-algoviz"></div>
-
-      <p>
-        FGSM(Fast Gradient Sign Method) is one of the simplest method for generating adversarial examples. The intuition is linearizing the cost function and solving for the perturbation that maximizes the cost subject to an $$L_\infty$$ constraint.
-      </p>
-      <p>
-        Fast gradient sign method maximizes the error to the ground truth classification of the sample and minimizes the error to the target classification. Let θ be the parameters of a model, $$x$$ be the input to the model, $$y$$ be the targets associated with $$x$$ (for machine learning tasks that have targets) and $$J(\theta, x, y)$$ be the cost used to train the neural network. We can linearize the cost function around the current value of $$\theta$$, obtaining an optimal max-norm constrained pertubation of
-        <d-math block>
-          \eta = \epsilon \text{sign}(\triangledown _xJ(\theta,x,y))
-        </d-math>
-      </p>
-      <p>
-        It can show the fragility of machine learning models like the above example using $$\eta$$. $$\triangledown_x J(\theta,x,y)$$ means that if the image’s value change in this direction, the impact on the final result would be largest.
-      </p>
-      <p>
-        Then, FGSM generate adversarial data following this equation.
-        <d-math block>
-          {x}'=x + \eta * \text{sign}(\triangledown _xJ(\theta,x,y))
-        </d-math>
-      </p>
-      <p>
-        In the implementation step, we generate the adversarial image by adding an imperceptibly small vector whose elements are equal to the sign of the elements of the gradient of the cost function with respect to the input. By changing the value of $$\epsilon$$, we can cause the same classifier to get different error rates on the same test set
-      <d-cite key="goodfellow2014explaining"></d-cite>
-      </p>
-
-      <a class="marker" href="#section-1.3" id="section-1.3"><span>1.3</span></a>
-      <h3>BIM</h3>
-
-      <div id="bim-algoviz"></div>
-
-      <p>
-        BIM(Basic Iterative Method) is  a straightforward way to extend the FGSM method—we apply it multiple times with small step size instead of applying adversarial noise $$\eta$$ once with one parameter $$\epsilon$$ , and clip pixel values of intermediate results after each step to ensure that they are in an $$\epsilon$$ -neighbourhood of the original image:
-
-        <d-math>
-          X_0^{adv}=X, X_{N+1}^{adv}=\text{Clip}_{X,\epsilon}\left \{X_N^{adv}+\alpha \text{sign}\left ( \bigtriangledown _XJ\left ( X_N^{adv},y_{true} \right ) \right ))  \right \}
-        </d-math>
-
-        This approach is convenient because it allows extra control over the attack. For example, one can control how far past the classification boundary a sample is pushed: one can terminate the loop on the iteration when $$X_{N+1}^{adv}$$ is first misclassified, or add additional noise beyond that point.
-
-        we set $$\alpha$$, which means that we changed the value of each pixel only by alpha on each step.
-      </p>
-      <p>
-        We selected the number of iterations to be $$\min(\epsilon + 4, 1.25\epsilon)$$. This amount of iterations was chosen heuristically; it is sufficient for the adversarial example to reach the edge of the $$\epsilon$$ max-norm ball but restricted enough to keep the computational cost of experiments manageable. The implementation is similar to using FGSM generation method iteratively until it satisfies some requirements.
-      <d-cite key="kurakin2016adversarial,feinman2017detecting"></d-cite>
-      </p>
-
-      <a class="marker" href="#section-1.4" id="section-1.4"><span>1.4</span></a>
-      <h3>JSMA</h3>
-
-      <div id="jsma-algoviz"></div>
-
-      <p>JSMA (Jacobian-based Saliency Map Attack) a simple iterative method for targeted misclassification. By exploiting the forward derivative of a DNN, one can find an adversarial perturbation that will force the model to misclassify into a specific target class. For an input $$x$$ and a neural network $$F$$, the output for class $$j$$ is denoted $$F_j(x)$$. To achieve a target class $$t$$, $$F_t(X)$$ must be increased while the probabilities $$F_j(x)$$ of all other classes $$j \ne t$$ decrease, until $$t = \text{argmax}_j F_j(X)$$. This is accomplished by exploiting the adversarial saliency map, which is defined as
-
-      <d-math block>
-        S(X,t)[i] = \begin{cases}
-          0 & \text{if }\frac{\partial F_t(X)}{\partial X_i} &lt; 0\text{ or }\sum_{j\neq t} \frac{\partial F_j(X)}{\partial X_i} &lt; 0\\
-          (\frac{\partial F_t(X)}{\partial X_i})\left | \sum_{j\neq t} \frac{\partial F_j(X)}{\partial X_i} \right | & \text{otherwise}
-        \end{cases}
-      </d-math>
-
-for an input feature i. Starting with a normal sample $$x$$, we locate the pair of features $$i, j$$ that maximize
-$$S(X, t)[i] + S(X, t)[j]$$, and perturb each feature by a constant offset $$\epsilon$$. This process is repeated iteratively until the target misclassification is achieved. This method can effectively
-produce MNIST samples that are correctly classified by human subjects but misclassified into a specific target class by a DNN with high success rate.
-      <d-cite key="feinman2017detecting"></d-cite>
-      </p>
-
-      <a class="marker" href="#section-1.5" id="section-1.5"><span>1.5</span></a>
-      <h3>DeepFool</h3>
-
-      <div id="deepfool-algoviz"></div>
-
-      <p>DeepFool is an $$L_{2}$$-attack that uses some intuitions from
-      geometry to direct its iterative search for optimal adversarial
-      perturbations from a given input point. For linear classifiers, given an
-      input $$x_{0}$$, DeepFool considers a polyhedron $$P$$ around $$x_{0}$$,
-      such that inside the polyhedron all points are correctly classified.
-      Hence, the DeepFool tries to find the distance from $$x_{0}$$ to
-      the closest hyperplane of the boundary of $$P$$. That distance, $$l(x_0)$$
-      is the minimum perturbation needed for misclassification.  DeepFool uses
-      an iterative algorithm to find this perturbation. </p>
-
-      <p>For non-linear classifiers, there is no longer a polyhedron around the
-      input point $$x_{0}$$. In this case, DeepFool approximate a polyhedron
-      $$P'$$ around $$x_{0}$$, and again tries to find the minimum perturbation
-      needed to find point outside that polyhedron. For this, a greedy iterative
-      optimization technique is followed. Compared to FGSM, DeepFool is able to
-      find adversarial examples with significantly smaller perturbations, and it
-      is able to find them much faster. For this reason, it can be useful as a
-      benchmark to compute the robustness of models to adversaries.
-      <d-cite key="moosavi2016deepfool"></d-cite>
-      </p>
-
-      <a class="marker" href="#section-1.6" id="section-1.6"><span>1.6</span></a>
-      <h3>Carlini-Wagner Attacks</h3>
-      <p>
-        Carlini-Wagner attack is considered to be one of the strongest attacks in the existing literature. It can be tailored to attacks
-        of different norms (specifically, $$L_{1}$$-norm, $$L_{2}$$-norm and $$L_{\infty}$$-norm). Specific formulation is to minimize
-        the objective function of form $$||\delta||_{p} + c \cdot f(x+\delta)$$ with constraint $$x+\delta \in [0,1]^{n}$$. Here, $$p =
-        \{0,2,\infty\}$$. Intuition behind this formulation is to make sure the perturbation $$\delta$$ with respect to $$p$$-norm is
-        minimized (first term in the objective function). The loss function value $$f(x+\delta)$$ captures the possibility that
-        $$x+\delta$$ belonging to a certain class and the smaller the function value, the more likely $$x+\delta$$ will belong to
-        a certain type of class (targeted attacl) or the more likely it will be in a different class from the label of $$x$$ (untargeted
-        attack). Different forms of $$f(x)$$ can be defined to count for both targeted and untergeted attacks. The constant $$c$$ controls
-        the relative importance of perturbation magnitude minimization i.e., $$||\delta||_{p}$$ and misclassification objective i.e.,
-        $$f(x+\delta)$$ and the best constant $$c$$ is typically obtained by performing binary searches.
-      </p>
-      <p>
-        In the implementation step,
-        the author gets rid of the constraint $$x+\delta \in [0,1]^{n}$$ by changing the variable as
-
-        <d-math block>
-          \delta_i = \frac{1}{2}(\tanh(w_i) + 1) - x_{i}
-        </d-math>
-
-        This is obvious as $$1\leq \tanh(w_i) \leq$$ and therefore,
-        <d-math block>
-          0 \leq x_{i}+\delta_{i}\leq 1
-        </d-math>
-
-        As for a side note, $$L_{2}$$ attack be solved stochastic gradient method, however, for $$L_{\infty}$$ attack, straight forward
-        application of stochastic gradient is not suitable in that $$L_{\infty}$$ is not fully differentiable. To avoid possible oscillation
-        during the optimization process, the author proceeds by iteratively optimizing the $$\infty$$-norm using $$L_{2}$$-norm in each
-        iteration. In each step, a threshold value $$\tau$$ is defined to limit the maximum magnitude change of $$\delta$$ and will be
-        penalized during the optimization process when $$\max(\delta_{i}) &gt; \tau$$. $$\tau$$ value will also be decreased in each iteration
-        if $$\max(\delta_{i}) &lt; \tau$$.
-      </p>
-
-    <a class="marker" href="#section-2" id="section-2"><span>2</span></a>
-    <h2>Defenses</h2>
-
-      <a class="marker" href="#section-2.1" id="section-2.1"><span>2.1</span></a>
-      <h3>Adversarial Retraining</h3>
-      <p>
-      One of the simplest defenses against adversarial examples is to incorporate the adversarial examples into the set of training data.  This strategy should intuitively make sense to anyone who has studied for an exam before - the most important topics to study are those that you don't understand.  Since adversarial examples are by definition misclassified, to increase the robustness of a model, it should be trained on misclassified inputs with the correct labels, so that it can learn to correctly classify those adversarial examples.  Ideally, this process will generalize so that adversarially trained models will be robust to previously-unseen adversarial examples as well.  Initially this technique was impractical because generating adversarial examples was a computationally expensive process and training requires a large number of data points to be effective. However, the introduction of faster methods to create adversarial examples like fast gradient sign method (FGSM) and projected gradient descent (PGD) has made adversarial training a realistic way to increase the robustness of a model.
-      </p>
-
-      <!--
-      <a class="marker" href="#section-2.3" id="section-2.3"><span>2.1</span></a>
-      <h3>Feature Squeezing</h3>
-      <p>123</p>
-      -->
-    </d-article>
-
-    <d-appendix>
-      <d-bibliography src="%PUBLIC_URL%/bibliography.bib"></d-bibliography>
-    </d-appendix>
-
-    <!--
-      This HTML file is a template.
-      The build step will place the bundled scripts into the <body> tag.
-      To begin the development, run `npm start`.
-      To create a production bundle, use `npm run build`.
-    -->
-  </body>
-</html>
+---
+layout: index
+---
+<ul>
+  {% for post in paginator.posts %}
+    <li class="right-item-img">
+      {% if post.description %}
+      <div class="article-wrap article-with-image">
+        <h3 class="article-title"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
+          {{ post.excerpt }}
+      </div>
+        {% if paginator.page ==1 %}
+        <div class="img-wrap" style="background:url(./img/{{ post.description }}) no-repeat;background-size:contain;">
+        </div>
+        {% else %}
+        <div class="img-wrap" style="background:url(../img/{{ post.description }}) no-repeat;background-size:contain;">
+        {% endif %}
+      {% else %}
+      <div class="article-wrap article-no-image">
+        <h3 class="article-title"><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h3>
+        {{ post.excerpt }}
+      </div>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+<div class="index-page-wrap">
+  <div class="index-page-inner-wrap">
+  {% if paginator.previous_page %}
+    <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}" class="index-page-pre index-page">上一页</a>
+  {% endif %}
+  {% if paginator.next_page %}
+      <a href="{{ site.baseurl }}{{ paginator.next_page_path }}" class="index-page-next index-page">下一页</a>
+  {% endif %}
+  <div class="index-page-inner-wrap">
+</div>
